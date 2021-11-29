@@ -1,5 +1,4 @@
 import random
-import queue
 from tkinter import *
 import time
 import math
@@ -173,7 +172,6 @@ def calcFail(fail):
     #print(rand)
     #print(100*fail)
     if rand < (100*fail):
-
         print("System failure")
         return True
     else:
@@ -189,7 +187,6 @@ def calcError(pos):
         randx = random.randint(0, 9)
         randy = random.randint(0, 9)
         pos = (randx, randy)
-    
     return pos
 
 #Function to shoot a specific position
@@ -211,7 +208,7 @@ def shoot(p):
         print("System has hit the target")
         targetLengths[flag-1] -= 1
         if(targetLengths[flag-1] == 0):
-            targetSunk.append(flag)
+            targetHit.append(flag)
             print("Target fully hit")
     else:
         hitFlag = (-1, -1)
@@ -225,7 +222,7 @@ print(targetPositions)
 matrix = makeMatrix(targetPositions)
 root = Tk()
 targetLengths = [4, 2]
-targetSunk = list()
+targetHit = list()
 sEnable = 0
 count = 0
 avail1 = 0
@@ -249,13 +246,13 @@ person2 = Blocks[5][7].markPerson(Window.getCanvas())
 #Allow the user to select the critical element for a given simulation
 print("Select critical element for the system: ")
 print("0: Reliability")
-print("1: Saftey")
+print("1: Safety")
 print("2: Availability")
 crit = int(input(""))
 # while (crit != 0):
 #    crit=int(input("Not a valid choice please try again: "))
 
-while((len(targetSunk) != 2)):
+while((len(targetHit) != 2)):
 
     #Take position of anticipated shot
     position = input("\nEnter x,y coordinates of your desired target: ")
